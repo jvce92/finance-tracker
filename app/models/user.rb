@@ -22,10 +22,6 @@ class User < ApplicationRecord
     user_stocks.where(stock_id: stock.id).exists
   end
 
-  def my_friends
-
-  end
-
   def full_name
     return "#{first_name} #{last_name}".strip if (first_name || last_name)
     "Anonymous"
