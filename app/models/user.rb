@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :user_stocks
   has_many :stocks, through: :user_stocks
+  has_many :friendships
+  has_many :friends, through: :friendships
 
   def can_add_stock?(ticker_symbol)
     under_stock_limit? && !stock_already_added?(ticker_symbol)
@@ -18,6 +20,10 @@ class User < ApplicationRecord
     stock = Stock.find_by_ticker(ticker_symbol)
     return false unless stock
     user_stocks.where(stock_id: stock.id).exists
+  end
+
+  def my_friends
+
   end
 
   def full_name
